@@ -51,6 +51,21 @@ private:
 	int denominator_ = 1;
 };
 
+ostream& operator<<(ostream& out, const Rational& r) {
+	if (r.Numerator() < 0) out << '(' << r.Numerator() << ')';
+	else out << r.Numerator();
+	out << '/' << r.Denominator();
+	return out;
+}
+
+istream& operator>>(istream& input, Rational& r) {
+	int numerator, denominator;
+	char slash;
+	input >> numerator >> slash >> denominator;
+	r = { numerator, denominator };
+	return input;
+}
+
 int main() {
 	return 0;
 }
