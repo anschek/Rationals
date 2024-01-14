@@ -87,16 +87,20 @@ istream& operator>>(istream& input, Rational& r) {
 	return input;
 }
 
-Rational operator+(const Rational& r1, const Rational& r2) {
-	int numerator = r1.Numerator() * r2.Denominator() + r2.Numerator() * r1.Denominator();
-	int denominator = r1.Denominator() * r2.Denominator();
-	return { numerator, denominator };
+Rational operator+(Rational r1, const Rational& r2) {
+	return r1+=r2;
 }
 
-Rational operator-(const Rational& r1, const Rational& r2) {
-	int numerator = r1.Numerator() * r2.Denominator() - r2.Numerator() * r1.Denominator();
-	int denominator = r1.Denominator() * r2.Denominator();
-	return { numerator, denominator };
+Rational operator-(Rational r1, const Rational& r2) {
+	return r1-=r2;
+}
+
+Rational operator*(Rational r1, const Rational& r2) {
+	return r1 *= r2;
+}
+
+Rational operator/(Rational r1, const Rational& r2) {
+	return r1 /= r2;
 }
 
 Rational operator+(const Rational& r) {
@@ -113,7 +117,7 @@ int main() {
 	cout << r1;
 
 	Rational r3{ 1,10 }, r4{ 1,100 };
-	r3 /= r4;
-	cout << '\n' << r3;
+
+	cout << '\n' << r3 + r4;
 	return 0;
 }
