@@ -66,6 +66,26 @@ istream& operator>>(istream& input, Rational& r) {
 	return input;
 }
 
+Rational operator+(const Rational& r1, const Rational& r2) {
+	int numerator = r1.Numerator() * r2.Denominator() + r2.Numerator() * r1.Denominator();
+	int denominator = r1.Denominator() * r2.Denominator();
+	return { numerator, denominator };
+}
+
+Rational operator-(const Rational& r1, const Rational& r2) {
+	int numerator = r1.Numerator() * r2.Denominator() - r2.Numerator() * r1.Denominator();
+	int denominator = r1.Denominator() * r2.Denominator();
+	return { numerator, denominator };
+}
+
+Rational operator+(const Rational& r) {
+	return r;
+}
+
+Rational operator-(const Rational& r1) {
+	return { -r1.Numerator(), -r1.Denominator() };
+}
+
 int main() {
 	return 0;
 }
