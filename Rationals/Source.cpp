@@ -27,12 +27,33 @@ public:
 		return denominator_;
 	}
 
-	Rational operator++(void) {
-		++numerator_;
+	Rational& operator+=(const Rational& right) {
+		numerator_ *= right.denominator_ + right.numerator_ * denominator_;
+		denominator_ *= right.denominator_;
 		Normalize();
 		return *this;
 	}
 
+	Rational& operator-=(const Rational& right) {
+		numerator_ *= right.denominator_ - right.numerator_ * denominator_;
+		denominator_ *= right.denominator_;
+		Normalize();
+		return *this;
+	}
+
+	Rational& operator*=(const Rational& right) {
+		numerator_ *= right.numerator_;
+		denominator_ *= right.denominator_;
+		Normalize();
+		return *this;
+	}
+
+	Rational& operator/=(const Rational& right) {
+		numerator_ *= right.denominator_;
+		denominator_ *= right.numerator_;
+		Normalize();
+		return *this;
+	}
 	~Rational() {
 	}
 
@@ -87,5 +108,12 @@ Rational operator-(const Rational& r1) {
 }
 
 int main() {
+	Rational r1{ 1,2 }, r2{ 1,3 };
+	r1 += r2;
+	cout << r1;
+
+	Rational r3{ 1,10 }, r4{ 1,100 };
+	r3 /= r4;
+	cout << '\n' << r3;
 	return 0;
 }
