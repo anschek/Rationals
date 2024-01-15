@@ -111,6 +111,32 @@ Rational operator-(const Rational& r1) {
 	return { -r1.Numerator(), -r1.Denominator() };
 }
 
+bool operator==(const Rational& r1, const Rational& r2) {
+	return r1.Numerator() == r2.Numerator() 
+		&& r1.Denominator() == r2.Denominator();
+}
+
+bool operator!=(const Rational& r1, const Rational& r2) {
+	return !(r1==r2);
+}
+
+bool operator<(const Rational& r1, const Rational& r2) {
+	return r1.Numerator()*r2.Denominator()
+		<r2.Numerator()*r1.Denominator();
+}
+
+bool operator>(const Rational& r1, const Rational& r2) {
+	return r1.Numerator()*r2.Denominator()
+		>r2.Numerator()*r1.Denominator();
+}
+
+bool operator<=(const Rational& r1, const Rational& r2) {
+	return !(r1>r2);
+}
+
+bool operator>=(const Rational& r1, const Rational& r2) {
+	return !(r1<r2);
+}
 int main() {
 	Rational r1{ 1,2 }, r2{ 1,3 };
 	r1 += r2;
